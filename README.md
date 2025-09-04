@@ -4,6 +4,8 @@
 
 Este projeto foi desenvolvido como parte da avaliação do curso de Desenvolvimento de Sistemas.
 
+## Desenvolvedor: JAISSON BERTOLINI 
+
 ## Funcionalidades Principais
 
 * **Gestão de Colaboradores:** CRUD (Criar, Ler, Atualizar, Excluir) completo para o registo de funcionários.
