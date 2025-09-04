@@ -1,0 +1,83 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-4">
+  <div class="row">
+    <div class="col-12">
+      <h1 class="mb-4">Gestão EPI Smart</h1>
+
+      <div class="card mb-3">
+        <div class="card-header">
+          <strong>Descrição</strong>
+        </div>
+        <div class="card-body">
+          <p><strong>Gestão EPI Smart</strong> é uma aplicação web desenvolvida em Python com o framework Django, criada para gerir o empréstimo de Equipamentos de Proteção Individual (EPIs) em ambientes de trabalho, como na construção civil. O sistema permite um controlo detalhado de colaboradores, equipamentos e dos empréstimos realizados, garantindo a segurança e a conformidade com as normas de trabalho.</p>
+          <p>Este projeto foi desenvolvido como parte da avaliação do curso de Desenvolvimento de Sistemas.</p>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-6 mb-3">
+          <div class="card">
+            <div class="card-header"><strong>Funcionalidades Principais</strong></div>
+            <div class="card-body">
+              <ul>
+                <li>Gestão de Colaboradores: CRUD completo para o registo de funcionários.</li>
+                <li>Gestão de Equipamentos: CRUD completo para EPIs, com controlo de stock (quantidade total e disponível).</li>
+                <li>Controlo de Empréstimos: Registo de retirada e devolução de equipamentos por colaborador.</li>
+                <li>Controlo de Stock Automatizado: Stock atualizado automaticamente em empréstimos e devoluções.</li>
+                <li>Sistema de Autenticação: Login protegido com página para alteração de credenciais.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-6 mb-3">
+          <div class="card">
+            <div class="card-header"><strong>Tecnologias Utilizadas</strong></div>
+            <div class="card-body">
+              <ul>
+                <li>Backend: Python, Django</li>
+                <li>Frontend: HTML, CSS, Bootstrap 5, JavaScript</li>
+                <li>Base de Dados: SQLite 3</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card mt-3">
+        <div class="card-header"><strong>Como Executar o Projeto Localmente</strong></div>
+        <div class="card-body">
+          <ol>
+            <li>Clone o repositório e aceda à pasta do projeto.</li>
+            <li>Crie e ative um ambiente virtual (ex.: <code>python -m venv .venv</code>).</li>
+            <li>Instale as dependências: <code>pip install -r requirements.txt</code>.</li>
+            <li>Execute as migrações: <code>python manage.py migrate</code>.</li>
+            <li>Crie um superutilizador: <code>python manage.py createsuperuser</code>.</li>
+            <li>Inicie o servidor de desenvolvimento: <code>python manage.py runserver</code> e aceda a <a href="/">http://127.0.0.1:8000/</a>.</li>
+          </ol>
+        </div>
+      </div>
+
+      <div class="card mt-3 mb-5">
+        <div class="card-header"><strong>Estrutura do Projeto</strong></div>
+        <div class="card-body">
+          <pre><code>Gestao_EPI_Smart/
+├── core/             # Aplicação principal com modelos, views e templates
+├── gestao_epi/       # Ficheiros de configuração do projeto Django
+├── .gitignore        # Ficheiros a serem ignorados pelo Git
+├── db.sqlite3        # Ficheiro da base de dados
+├── manage.py         # Utilitário de linha de comando do Django
+└── requirements.txt  # Lista de dependências Python
+</code></pre>
+        </div>
+      </div>
+        <div class="text-center mb-4">
+          <strong>Desenvolvido por: Jaisson Bertolini</strong>
+        </div>
+
+    </div>
+  </div>
+</div>
+{% endblock %}
