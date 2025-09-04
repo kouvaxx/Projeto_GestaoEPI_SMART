@@ -10,8 +10,8 @@ Este projeto foi desenvolvido como parte da avaliação do curso de Desenvolvime
 
 * **Gestão de Colaboradores:** CRUD (Criar, Ler, Atualizar, Excluir) completo para o registo de funcionários.
 * **Gestão de Equipamentos:** CRUD completo para todos os EPIs, com controlo de stock (quantidade total e disponível).
-* **Controlo de Empréstimos:** Sistema para registar a retirada e a devolução de equipamentos, associando-os a um colaborador.
-* **Controlo de Stock Automatizado:** O stock de um equipamento é atualizado automaticamente sempre que um empréstimo ou devolução é realizado.
+* **Controle de Empréstimos:** Sistema para registar a retirada e a devolução de equipamentos, associando-os a um colaborador.
+* **Controle de Stock Automatizado:** O stock de um equipamento é atualizado automaticamente sempre que um empréstimo ou devolução é realizado.
 * **Sistema de Autenticação:** Acesso ao sistema protegido por login e senha, com uma página para que o administrador possa alterar as suas credenciais.
 
 ## Tecnologias Utilizadas
@@ -34,7 +34,7 @@ Siga os passos abaixo para configurar e executar o projeto no seu ambiente de de
 1.  **Clone o repositório:**
     ```bash
     git clone <URL_DO_SEU_REPOSITORIO_GIT>
-    cd Gestao_EPI_Smart
+    cd GestaoEPI_Smart
     ```
 
 2.  **Crie e ative um ambiente virtual:**
@@ -77,7 +77,7 @@ Siga os passos abaixo para configurar e executar o projeto no seu ambiente de de
 ## Estrutura do Projeto
 
 ```
-Gestao_EPI_Smart/
+GestaoEPI_Smart/
 ├── core/             # Aplicação principal com modelos, views e templates
 ├── gestao_epi/       # Ficheiros de configuração do projeto Django
 ├── .gitignore        # Ficheiros a serem ignorados pelo Git
