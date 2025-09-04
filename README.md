@@ -4,7 +4,7 @@
 
 Este projeto foi desenvolvido como parte da avaliação do curso de Desenvolvimento de Sistemas.
 
-## Desenvolvedor: JAISSON BERTOLINI 
+## Desenvolvedor: Jaisson Bertolini
 
 ## Funcionalidades Principais
 
@@ -73,6 +73,8 @@ Siga os passos abaixo para configurar e executar o projeto no seu ambiente de de
 
 7.  **Aceda à aplicação:**
     Abra o seu navegador e aceda a [http://127.0.0.1:8000/](http://127.0.0.1:8000/). Você será redirecionado para a página de login. Utilize as credenciais que acabou de criar.
+Login: admin
+Senha: admin
 
 ## Estrutura do Projeto
 
