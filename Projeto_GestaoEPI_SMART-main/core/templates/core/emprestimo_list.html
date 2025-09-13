@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <h1 class="h2">Lista de Empréstimos</h1>
+    <a href="{% url 'emprestimo_create' %}" class="btn btn-primary shadow-sm">Adicionar Empréstimo</a>
+  </div>
+
+  <div class="card">
+    <div class="card-body">
+      <div class="table-responsive">
+        <table class="table table-hover">
+          <thead class="table-light">
+            <tr>
+              <th scope="col">Colaborador</th>
+              <th scope="col">Equipamento</th>
+              <th scope="col">Quantidade</th>
+              <th scope="col">Data do Empréstimo</th>
+              <th scope="col">Data de Devolução</th>
+              <th scope="col">Status</th>
+              <th scope="col" class="text-end">Ações</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for emprestimo in emprestimos %}
+              <tr>
+                <td>{{ emprestimo.colaborador.nome_completo }}</td>
+                <td>{{ emprestimo.equipamento.nome_epi }}</td>
+                <td>
+                  <div>Emprestada: {{ emprestimo.quantidade_emprestada }}</div>
+                  <div>Devolvida: {{ emprestimo.quantidade_devolvida }}</div>
+                  <div>Em uso: {{ emprestimo.em_uso }}</div>
+                </td>
+                <td>{{ emprestimo.data_emprestimo|date:"d/m/Y H:i" }}</td>
+                <td>
+                  {% if emprestimo.data_devolucao %}
+                    {{ emprestimo.data_devolucao|date:"d/m/Y H:i" }}
+                  {% else %}
+                    -
+                  {% endif %}
+                </td>
+                <td>
+                  {% if emprestimo.devolvido %}
+                      <span class="badge bg-success">Devolvido</span>
+                  {% else %}
+                      <span class="badge bg-warning text-dark">Emprestado</span>
+                  {% endif %}
+                </td>
+                <td class="text-end">
+                    {% if not emprestimo.devolvido and emprestimo.em_uso > 0 %}
+            <a href="{% url 'emprestimo_devolucao' emprestimo.pk %}" class="btn btn-sm btn-outline-success me-2">Devolver</a>
+          {% endif %}
+                    <a href="{% url 'emprestimo_update' emprestimo.pk %}" class="btn btn-sm btn-outline-primary me-2">Editar</a>
+                    <form action="{% url 'emprestimo_delete' emprestimo.pk %}" method="post" style="display: inline;">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-sm btn-outline-danger">Excluir</button>
+                    </form>
+                </td>
+              </tr>
+            {% empty %}
+              <tr>
+                <td colspan="7" class="text-center py-5">Nenhum empréstimo cadastrado.</td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+{% endblock %}
