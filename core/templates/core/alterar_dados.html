@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <div class="card shadow-sm">
+                <div class="card-header bg-primary text-white">
+                    <h3 class="mb-0">Alterar Dados do Perfil</h3>
+                </div>
+                <div class="card-body">
+                    <form method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        
+                        <!-- Seção de Foto de Perfil -->
+                        <div class="row align-items-center mb-4">
+                            <div class="col-md-4 text-center">
+                                <img src="{{ user.perfil.foto.url }}" alt="Foto de Perfil" class="img-fluid rounded-circle" style="width: 150px; height: 150px; object-fit: cover;">
+                            </div>
+                            <div class="col-md-8">
+                                <h4 class="h5">Alterar Foto de Perfil</h4>
+                                <div class="mb-3">
+                                    {{ perfil_form.foto }}
+                                </div>
+                                <button type="submit" name="change_perfil" class="btn btn-primary">Salvar Foto</button>
+                            </div>
+                        </div>
+
+                        <hr>
+
+                        <!-- Seção de Nome de Usuário -->
+                        <div class="mb-4">
+                            <h4 class="h5">Alterar Nome de Usuário</h4>
+                            <div class="mb-3">
+                                <label for="{{ user_form.username.id_for_label }}" class="form-label">Nome de Usuário</label>
+                                {{ user_form.username }}
+                            </div>
+                            <button type="submit" name="change_username" class="btn btn-primary">Salvar Nome de Usuário</button>
+                        </div>
+
+                        <hr>
+
+                        <!-- Seção de Senha -->
+                        <div>
+                            <h4 class="h5">Alterar Senha</h4>
+                            <p class="text-muted small">Deixe em branco se não quiser alterar a senha.</p>
+                            {{ password_form.as_p }}
+                            <button type="submit" name="change_password" class="btn btn-primary">Salvar Senha</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-4">
+  <div class="row">
+    <div class="col-12">
+      <h1 class="mb-4">Página de Ajuda - Instruções de Uso</h1>
+
+      <div class="accordion" id="ajudaAccordion">
+        <div class="accordion-item">
+          <h2 class="accordion-header" id="headingAuth">
+            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseAuth" aria-expanded="true" aria-controls="collapseAuth">
+              Autenticação
+            </button>
+          </h2>
+          <div id="collapseAuth" class="accordion-collapse collapse show" aria-labelledby="headingAuth" data-bs-parent="#ajudaAccordion">
+            <div class="accordion-body">
+              <ul>
+                <li><strong>Login:</strong> Para aceder ao sistema, utilize as credenciais de administrador fornecidas.</li>
+                <li><strong>Alterar Senha:</strong> No canto superior direito, clique no seu nome de utilizador e selecione 'Alterar Senha' para definir uma nova senha.</li>
+                <li><strong>Sair:</strong> Para sair do sistema de forma segura, utilize a opção 'Sair' no mesmo menu.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <h2 class="accordion-header" id="headingEmprestimos">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseEmprestimos" aria-expanded="false" aria-controls="collapseEmprestimos">
+              Gestão de Empréstimos
+            </button>
+          </h2>
+          <div id="collapseEmprestimos" class="accordion-collapse collapse" aria-labelledby="headingEmprestimos" data-bs-parent="#ajudaAccordion">
+            <div class="accordion-body">
+              <ul>
+                <li><strong>Como Registar:</strong> Na página 'Empréstimos', clique em 'Adicionar Empréstimo', selecione o colaborador, o equipamento e a quantidade, e clique em 'Salvar'.</li>
+                <li><strong>Como Devolver:</strong> Para registar uma devolução, encontre o empréstimo na lista e clique no botão 'Devolver'.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <h2 class="accordion-header" id="headingGestao">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseGestao" aria-expanded="false" aria-controls="collapseGestao">
+              Gestão de Colaboradores e Equipamentos
+            </button>
+          </h2>
+          <div id="collapseGestao" class="accordion-collapse collapse" aria-labelledby="headingGestao" data-bs-parent="#ajudaAccordion">
+            <div class="accordion-body">
+              <p>O processo é similar: aceda à página correspondente, utilize o botão 'Adicionar' para criar novos registos e os botões 'Editar' ou 'Excluir' para gerir os existentes.</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+</div>
+{% endblock %}
