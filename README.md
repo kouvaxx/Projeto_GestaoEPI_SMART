@@ -20,7 +20,7 @@
 
 ## Sobre o Projeto
 
-O **Gestão EPI Smart** é uma aplicação web que resolve a necessidade de controlo e gestão de Equipamentos de Proteção Individual (EPIs) em ambientes de trabalho. A plataforma oferece uma solução centralizada para registar, monitorizar e gerir a distribuição e devolução de EPIs, garantindo a segurança dos colaboradores e a conformidade com as normas de segurança.
+O **Gestão EPI Smart** é uma aplicação web que resolve a necessidade de controle e gestão de Equipamentos de Proteção Individual (EPIs) em ambientes de trabalho. A plataforma oferece uma solução centralizada para registar, monitorizar e gerir a distribuição e devolução de EPIs, garantindo a segurança dos colaboradores e a conformidade com as normas de segurança.
 
 ### Funcionalidades Principais
 
