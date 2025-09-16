@@ -1,0 +1,65 @@
+{% load static %}
+<a href="{% url 'home' %}" class="logo-link d-flex flex-column align-items-center mb-3 mb-md-0 me-md-auto text-decoration-none text-center">
+  <img src="{% static 'images/LOGO_PRINCIPAL.png' %}" alt="Logo" class="mb-2" style="height: 150px;" id="mainLogoImage">
+  <span class="fs-4 text-body-emphasis">Gestão EPI Smart</span>
+</a>
+<hr>
+<ul class="nav nav-pills flex-column mb-auto">
+  <li class="nav-item">
+    <a href="{% url 'emprestimo_list' %}" class="nav-link {% if 'emprestimo' in request.resolver_match.view_name %}active{% endif %}">
+      <i class="bi bi-arrow-down-up"></i>
+      Empréstimos
+    </a>
+  </li>
+  <li>
+    <a href="{% url 'colaborador_list' %}" class="nav-link {% if 'colaborador' in request.resolver_match.view_name %}active{% endif %}">
+      <i class="bi bi-people-fill"></i>
+      Colaboradores
+    </a>
+  </li>
+  <li>
+    <a href="{% url 'equipamento_list' %}" class="nav-link {% if 'equipamento' in request.resolver_match.view_name %}active{% endif %}">
+      <i class="bi bi-shield-check"></i>
+      Equipamentos
+    </a>
+  </li>
+</ul>
+<hr>
+<div class="sidebar-footer">
+  <div class="d-flex justify-content-between align-items-center w-100 mb-3">
+    <div class="dropdown">
+      <a href="#" class="d-flex align-items-center text-body-emphasis text-decoration-none dropdown-toggle user-profile" data-bs-toggle="dropdown" aria-expanded="false">
+        <img src="{{ user.perfil.foto.url }}" alt="" class="rounded-circle me-2">
+        <strong>{{ user.username }}</strong>
+      </a>
+      <ul class="dropdown-menu text-small shadow">
+        <li><a class="dropdown-item" href="{% url 'profile_settings' %}">Alterar Dados</a></li>
+        <li><hr class="dropdown-divider"></li>
+        <li>
+          <form action="{% url 'logout' %}" method="post" class="d-flex">
+            {% csrf_token %}
+            <button type="submit" class="dropdown-item">Sair</button>
+          </form>
+        </li>
+      </ul>
+    </div>
+    <div class="theme-switcher">
+        <i class="bi bi-sun-fill theme-icon"></i>
+    </div>
+  </div>
+  <hr>
+  <ul class="nav nav-pills flex-column mb-3">
+    <li class="nav-item">
+      <a href="{% url 'sobre' %}" class="nav-link {% if 'sobre' in request.resolver_match.view_name %}active{% endif %}">
+        <i class="bi bi-info-circle"></i>
+        Sobre
+      </a>
+    </li>
+    <li class="nav-item">
+      <a href="{% url 'ajuda' %}" class="nav-link {% if 'ajuda' in request.resolver_match.view_name %}active{% endif %}>">
+        <i class="bi bi-question-circle"></i>
+        Ajuda
+      </a>
+    </li>
+  </ul>
+</div>

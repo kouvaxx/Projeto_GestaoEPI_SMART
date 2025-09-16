@@ -9,7 +9,12 @@ urlpatterns = [
     # Auth
     path('login/', views.CustomLoginView.as_view(), name='login'),
     path('logout/', views.CustomLogoutView.as_view(), name='logout'),
-    path('alterar-dados/', views.alterar_dados_view, name='alterar_dados'),
+    
+    # Profile Management
+    path('profile-settings/', views.profile_settings, name='profile_settings'),
+    path('profile-settings/picture/', views.update_profile_picture, name='update_profile_picture'),
+    path('profile-settings/username/', views.update_username, name='update_username'),
+    path('profile-settings/password/', views.update_password, name='update_password'),
 
     # Colaboradores
     path('colaboradores/', views.colaborador_list, name='colaborador_list'),
@@ -29,6 +34,7 @@ urlpatterns = [
     path('emprestimos/edit/<int:pk>/', views.emprestimo_update, name='emprestimo_update'),
     path('emprestimos/delete/<int:pk>/', views.emprestimo_delete, name='emprestimo_delete'),
     path('emprestimos/devolucao/<int:pk>/', views.emprestimo_devolucao, name='emprestimo_devolucao'),
+    
     # Ajuda
     path('ajuda/', views.ajuda_view, name='ajuda'),
     # Sobre

@@ -6,7 +6,7 @@ from django.db import transaction
 from django.db import transaction, models
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.views import LoginView, LogoutView
-from django.contrib.auth.forms import AuthenticationForm, PasswordChangeForm
+from django.contrib.auth.forms import AuthenticationForm, PasswordChangeForm, SetPasswordForm # Import SetPasswordForm
 from .forms import CustomAuthenticationForm
 from django.urls import reverse_lazy
 from django.urls import reverse
@@ -16,6 +16,7 @@ from django.contrib import messages
 from django.contrib.auth import update_session_auth_hash
 from django.http import JsonResponse
 from collections import defaultdict
+from django.contrib.auth.models import User # Ensure User model is imported
 
 class CustomLoginView(LoginView):
     template_name = 'core/login.html'
@@ -31,48 +32,6 @@ class CustomLogoutView(LogoutView):
     def dispatch(self, request, *args, **kwargs):
         messages.success(request, 'Logout bem-sucedido!')
         return super().dispatch(request, *args, **kwargs)
-
-@login_required
-def alterar_dados_view(request):
-    try:
-        perfil_instance = request.user.perfil
-    except Perfil.DoesNotExist:
-        perfil_instance = Perfil.objects.create(user=request.user)
-
-    if request.method == 'POST':
-        user_form = UserUpdateForm(request.POST, instance=request.user)
-        password_form = PasswordChangeForm(request.user, request.POST)
-        perfil_form = PerfilUpdateForm(request.POST, request.FILES, instance=perfil_instance)
-
-        if 'change_username' in request.POST and user_form.is_valid():
-            user_form.save()
-            messages.success(request, 'Seu nome de usuário foi atualizado!')
-            return redirect('alterar_dados')
-
-        if 'change_password' in request.POST and password_form.is_valid():
-            user = password_form.save()
-            update_session_auth_hash(request, user)  # Important!
-            messages.success(request, 'Sua senha foi atualizada com sucesso!')
-            return redirect('alterar_dados')
-
-        if 'change_perfil' in request.POST and perfil_form.is_valid():
-            perfil_form.save()
-            messages.success(request, 'Sua foto de perfil foi atualizada com sucesso!')
-            return redirect('alterar_dados')
-
-    else:
-        user_form = UserUpdateForm(instance=request.user)
-        password_form = PasswordChangeForm(request.user)
-        perfil_form = PerfilUpdateForm(instance=perfil_instance)
-
-    context = {
-        'user_form': user_form,
-        'password_form': password_form,
-        'perfil_form': perfil_form
-    }
-
-    return render(request, 'core/alterar_dados.html', context)
-
 
 @login_required
 def home(request):
@@ -281,4 +240,67 @@ def sobre_view(request):
     """Página pública 'Sobre' com informações do projeto."""
     return render(request, 'core/sobre.html')
 
+# New views for independent profile management
+@login_required
+def update_profile_picture(request):
+    try:
+        perfil_instance = request.user.perfil
+    except Perfil.DoesNotExist:
+        perfil_instance = Perfil.objects.create(user=request.user)
 
+    if request.method == 'POST':
+        perfil_form = PerfilUpdateForm(request.POST, request.FILES, instance=perfil_instance)
+        if perfil_form.is_valid():
+            perfil_form.save()
+            messages.success(request, 'Sua foto de perfil foi atualizada com sucesso!')
+            return redirect('update_profile_picture')
+        else:
+            messages.error(request, 'Erro ao atualizar a foto de perfil. Verifique os dados.')
+    else:
+        perfil_form = PerfilUpdateForm(instance=perfil_instance)
+    
+    context = {
+        'perfil_form': perfil_form
+    }
+    return render(request, 'core/update_profile_picture.html', context)
+
+@login_required
+def update_username(request):
+    if request.method == 'POST':
+        user_form = UserUpdateForm(request.POST, instance=request.user)
+        if user_form.is_valid():
+            user_form.save()
+            messages.success(request, 'Seu nome de usuário foi atualizado com sucesso!')
+            return redirect('update_username')
+        else:
+            messages.error(request, 'Erro ao atualizar o nome de usuário. Verifique os dados.')
+    else:
+        user_form = UserUpdateForm(instance=request.user)
+    
+    context = {
+        'user_form': user_form
+    }
+    return render(request, 'core/update_username.html', context)
+
+@login_required
+def update_password(request):
+    if request.method == 'POST':
+        password_form = SetPasswordForm(request.user, request.POST)
+        if password_form.is_valid():
+            password_form.save()
+            update_session_auth_hash(request, password_form.user) # Important to keep the user logged in
+            messages.success(request, 'Sua senha foi atualizada com sucesso!')
+            return redirect('update_password')
+        else:
+            messages.error(request, 'Erro ao atualizar a senha. Verifique os dados.')
+    else:
+        password_form = SetPasswordForm(request.user)
+    
+    context = {
+        'password_form': password_form
+    }
+    return render(request, 'core/update_password.html', context)
+
+@login_required
+def profile_settings(request):
+    return render(request, 'core/profile_settings.html')

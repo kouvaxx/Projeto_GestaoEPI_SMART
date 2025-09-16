@@ -1,72 +1,44 @@
 {% extends 'base.html' %}
+{% load static %}
+
+{% block body_class %}login-page-body{% endblock %}
+{% block title %}Login - Gestão EPI Smart{% endblock %}
 
 {% block content %}
-<div class="row justify-content-center">
-    <div class="col-md-6 col-lg-5">
-        <div class="card shadow-sm">
-            <div class="card-header bg-primary text-white">
-                <h4 class="mb-0 text-center">Entrar</h4>
+<div class="col-md-12">
+    <div class="card shadow-lg border-0">
+        <div class="card-body p-4 p-md-5">
+            
+            <div class="text-center mb-4">
+                <img src="{% static 'images/LOGO_PRINCIPAL.png' %}" alt="Logotipo Gestão EPI Smart" style="height: 300px;">
             </div>
-            <div class="card-body">
-                <form method="post" novalidate>
-                    {% csrf_token %}
 
-                    {% if form.non_field_errors %}
-                        <div class="alert alert-danger">
-                            {% for error in form.non_field_errors %}
-                                <p class="mb-0">{{ error }}</p>
-                            {% endfor %}
-                        </div>
-                    {% endif %}
+            <h3 class="text-center fw-bold mb-4">Gestão EPI Smart</h3>
+            
+            {% if form.errors %}
+                <div class="alert alert-danger text-center" role="alert">
+                    Nome de utilizador ou senha inválidos. Tente novamente.
+                </div>
+            {% endif %}
 
-                    {% for field in form %}
-                        <div class="mb-3">
-                            <label for="{{ field.id_for_label }}" class="form-label">{{ field.label }}</label>
-                            {% if field.name == 'password' %}
-                                <div class="input-group">
-                                    {{ field }}
-                                    <button class="btn btn-outline-secondary" type="button" id="togglePassword" aria-label="Mostrar senha">
-                                        <i class="bi bi-eye-slash" id="togglePasswordIcon"></i>
-                                    </button>
-                                </div>
-                            {% else %}
-                                {{ field }}
-                            {% endif %}
+            <form method="post">
+                {% csrf_token %}
 
-                            {% if field.help_text %}
-                                <div class="form-text text-muted">{{ field.help_text|safe }}</div>
-                            {% endif %}
+                <div class="form-floating mb-3">
+                    <input type="text" name="username" class="form-control" id="floatingInput" placeholder="Nome de Utilizador" required>
+                    <label for="floatingInput">Nome de Utilizador</label>
+                </div>
 
-                            {% for error in field.errors %}
-                                <div class="invalid-feedback d-block">{{ error }}</div>
-                            {% endfor %}
-                        </div>
-                    {% endfor %}
-
-                    <div class="mt-4">
-                        <button type="submit" class="btn btn-primary d-grid w-100">Entrar</button>
-                    </div>
-                </form>
-            </div>
+                <div class="form-floating mb-4">
+                    <input type="password" name="password" class="form-control" id="floatingPassword" placeholder="Senha" required>
+                    <label for="floatingPassword">Senha</label>
+                </div>
+                
+                <div class="d-grid">
+                    <button type="submit" class="btn btn-primary btn-lg fw-bold">Entrar</button>
+                </div>
+            </form>
         </div>
     </div>
 </div>
-
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const togglePassword = document.querySelector('#togglePassword');
-        const toggleIcon = document.querySelector('#togglePasswordIcon');
-        const password = document.querySelector('input[type="password"]');
-
-        if (togglePassword && password) {
-            togglePassword.addEventListener('click', function () {
-                const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
-                password.setAttribute('type', type);
-                toggleIcon.classList.toggle('bi-eye');
-                toggleIcon.classList.toggle('bi-eye-slash');
-            });
-        }
-    });
-</script>
-
 {% endblock %}

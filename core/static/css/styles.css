@@ -1,0 +1,249 @@
+:root {
+  --sidebar-width: 260px;
+  --sidebar-bg: #f0f2f5; /* Light gray for sidebar */
+  --sidebar-link-color: #212529; /* Black text for light mode */
+  --sidebar-link-hover-bg: rgba(0, 0, 0, 0.05); /* Subtle hover */
+  --sidebar-link-hover-color: #000; /* Black text for hovered/active links in light mode */
+  --sidebar-active-link-bg: rgba(0, 0, 0, 0.1); /* Subtle active */
+  --sidebar-icon-color: #212529; /* Black icons for light mode */
+  
+  --bs-body-font-family: 'Poppins', sans-serif;
+  --bs-body-bg: #ffffff; /* Pure white background */
+  --bs-body-color: #212529; /* Dark text */
+  --card-bg: #ffffff; /* White card background */
+  --card-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  --card-border: 1px solid #e9ecef; /* Light border for cards */
+  --card-border-radius: 0.75rem;
+  --btn-border-radius: 0.5rem;
+  --btn-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  --bs-primary-rgb: 14, 116, 144; /* cycan-700 */
+}
+
+[data-bs-theme="dark"] {
+  --sidebar-bg: linear-gradient(180deg, #1e293b 0%, #0f172a 100%);
+  --sidebar-link-color: rgba(255, 255, 255, 0.7);
+  --sidebar-link-hover-bg: rgba(255, 255, 255, 0.08);
+  --sidebar-link-hover-color: #fff;
+  --sidebar-active-link-bg: rgba(0, 0, 0, 0.2);
+  --sidebar-icon-color: rgba(255, 255, 255, 0.6);
+
+  --bs-body-bg: #0f172a;
+  --bs-body-color: #e2e8f0;
+  --card-bg: #1e293b;
+  --card-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  --card-border: 1px solid #334155;
+  --bs-tertiary-bg: #334155;
+}
+
+html, body {
+  height: 100%;
+}
+
+body {
+  background-color: var(--bs-body-bg);
+  color: var(--bs-body-color);
+  font-family: var(--bs-body-font-family);
+  transition: background-color 0.3s ease;
+}
+
+
+
+/* Remove o padding do content-wrapper APENAS na página de login */
+.login-page-body .content-wrapper {
+    padding: 0;
+    width: 100%;
+    max-width: 500px; /* Define uma largura máxima para o card de login */
+}
+
+/* Transitions */
+.sidebar, .content-wrapper, .nav-link, .card, .btn, .logo-link {
+  transition: all 0.2s ease-in-out;
+}
+
+/* Sidebar */
+.sidebar {
+  width: var(--sidebar-width);
+  background: var(--sidebar-bg);
+  box-shadow: 4px 0 15px rgba(0, 0, 0, 0.1);
+  z-index: 1100;
+}
+
+.sidebar .nav-link {
+  color: var(--sidebar-link-color);
+  font-weight: 500;
+  padding: 0.75rem 1.25rem;
+  border-radius: var(--btn-border-radius);
+  margin-bottom: 0.25rem;
+  display: flex;
+  align-items: center;
+}
+
+.sidebar .nav-link i {
+  font-size: 1.2rem;
+  color: var(--sidebar-icon-color);
+  margin-right: 1rem;
+  width: 20px;
+  text-align: center;
+  transition: color 0.2s ease;
+}
+
+.sidebar .nav-link.active, .sidebar .nav-link:hover {
+  background-color: var(--sidebar-link-hover-bg);
+  color: var(--sidebar-link-hover-color);
+}
+
+.sidebar .nav-link:hover {
+  transform: translateX(5px);
+}
+
+.sidebar .nav-link.active {
+  background-color: var(--sidebar-active-link-bg);
+  box-shadow: inset 3px 0 0 #38bdf8; /* lightblue-400 */
+  transform: translateX(0);
+}
+
+.user-profile img {
+  width: 40px;
+  height: 40px;
+  object-fit: cover;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+}
+
+/* Content */
+.content-wrapper {
+  padding: 2rem;
+}
+
+/* Components */
+.card {
+  background-color: var(--card-bg);
+  border: var(--card-border);
+  border-radius: var(--card-border-radius);
+  box-shadow: var(--card-shadow);
+}
+.card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 15px rgba(0,0,0,0.08);
+}
+[data-bs-theme="dark"] .card:hover {
+    box-shadow: 0 8px 15px rgba(0,0,0,0.25);
+}
+
+.btn {
+  border-radius: var(--btn-border-radius);
+  font-weight: 500;
+  box-shadow: var(--btn-shadow);
+}
+.btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+}
+
+.alert {
+    border-radius: var(--btn-border-radius);
+    box-shadow: var(--card-shadow);
+    border-left: 5px solid;
+}
+.alert-success { border-color: var(--bs-success); }
+.alert-danger { border-color: var(--bs-danger); }
+.alert-warning { border-color: var(--bs-warning); }
+.alert-info { border-color: var(--bs-info); }
+
+/* Responsive */
+@media (min-width: 992px) {
+  body.authenticated {
+    display: flex;
+  }
+  .content-wrapper {
+    margin-left: var(--sidebar-width);
+    width: calc(100% - var(--sidebar-width));
+  }
+  .mobile-header {
+    display: none;
+  }
+}
+
+@media (max-width: 991.98px) {
+  .sidebar-desktop {
+    display: none;
+  }
+  .content-wrapper {
+    padding: 1rem;
+    padding-top: 70px; /* Space for fixed mobile header */
+  }
+}
+
+.offcanvas-body {
+  background: var(--sidebar-bg);
+}
+
+.theme-switcher {
+    cursor: pointer;
+    color: var(--sidebar-link-color);
+    font-size: 1.2rem;
+}
+.theme-switcher:hover {
+    color: var(--sidebar-link-hover-color);
+}
+
+.sidebar-footer {
+    font-size: 0.85rem;
+}
+.sidebar-footer a {
+    color: var(--sidebar-link-color);
+    text-decoration: none;
+}
+.sidebar-footer a:hover {
+    color: var(--sidebar-link-hover-color);
+    text-decoration: underline;
+}
+
+/* --- ADICIONE ESTE CÓDIGO NO FINAL DO SEU CSS --- */
+
+/* Estilos específicos para o corpo da página de login */
+.login-page-body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh; /* Garante que o corpo ocupa a altura toda da tela */
+    padding: 1rem; /* Adiciona um pequeno espaçamento para o cartão não colar nas bordas em telas pequenas */
+}
+
+/* Remove o padding e a margem do .content-wrapper APENAS na página de login,
+  permitindo que o cartão de login seja perfeitamente centralizado.
+*/
+.login-page-body .content-wrapper {
+    padding: 0;
+    margin-left: 0; 
+    width: 100%;
+    max-width: 500px; /* Define uma largura máxima para o cartão de login */
+}
+
+/* Animation for logo on click */
+@keyframes logo-pop {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+
+.logo-animated {
+  cursor: pointer; /* Indicate it's clickable */
+  animation: logo-pop 0.3s ease-in-out;
+}
+
+/* Add vertical lines to table cells */
+.table th,
+.table td {
+  border-right: 1px solid var(--card-border); /* Use a subtle border color */
+}
+
+/* Remove border from the last column */
+.table th:last-child,
+.table td:last-child {
+  border-right: none;
+}
+
+.logo-link:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+}
